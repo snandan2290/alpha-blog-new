@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 
+    
+
     def show
         # byebug
         @article = Article.find(params[:id])        
@@ -10,17 +12,18 @@ class ArticlesController < ApplicationController
     end
 
     def new
-
+      @article = Article.new
     end
 
     def create
-        # render plain: params[:article]
         @article = Article.new(params.require(:article).permit(:title, :description))
-        res = @article.save
-        @articles = Article.all
-        # render plain: @articles.inspect
-        # render plain: @article.inspect
-        redirect_to  @article
+        if res = @article.save
+          flash[:notice] = "Article was created successfully!!"
+          redirect_to @article
+        else
+          render "new"
+        end
+
     end
 
 end
