@@ -1,5 +1,8 @@
 <h1>Create a new article</h1>
 
+<%= render 'form' %>
+
+<% if false %>
 <% if @article.errors.any? %>
   <h2>The following errors prevented the article being saved</h2>
   <ul>
@@ -24,6 +27,7 @@
 
   <p><%= f.submit%></p>
 
+<% end %>
 <% end %>
 
 <P><%= link_to 'Index', articles_path %></p>
