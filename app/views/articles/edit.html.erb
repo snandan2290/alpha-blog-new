@@ -1,33 +1,7 @@
-<h1>Edit a article</h1>
+<div id="page-content">
+  <h1 class="text-center mt-4">Edit Article<h1>
 
-<%= render 'form' %>
 
-<% if false %>
-<% if @article.errors.any? %>
-  <h2>The following errors prevented the article being saved</h2>
-  <ul>
-    <% @article.errors.full_messages.each do |message| %>  
-      <li>
-        <%= message%>
-      </li>
-    <% end %>
-  </ul>
+  <%= render 'form' %>
 
-<% end %>
-
-<%= form_with(model: @article, local: true) do  |f| %>
-    <p>
-        <%= f.label :title %></br>
-        <%= f.text_field :title %>
-    </p> 
-    <p>
-        <%= f.label :description %></br>
-        <%= f.text_area :description %>
-    </p> 
-
-    <p><%= f.submit%></p>
-
-<% end %>
-<% end %>
-
-<P><%= link_to 'Cncel and return to Index', articles_path %></p>
+</div>
