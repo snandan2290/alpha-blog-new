@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+    has_many :articles
+
     validates :email, presence: true, 
               uniqueness: true, 
               length: { minimum: 9 },
