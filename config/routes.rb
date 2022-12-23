@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
 
   resources :articles#, only: [:show, :index, :new, :create, :edit, :update]
+
+  get 'signup' => 'users#new'
+
+  # post 'users' => 'users#create'
+  resources :users, except: [:new]
 end
