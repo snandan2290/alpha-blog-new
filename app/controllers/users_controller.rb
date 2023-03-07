@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :set_user, only: [:show, :edit, :destroy, :update]
 
     def new
         @user = User.new
@@ -14,9 +15,29 @@ class UsersController < ApplicationController
             render 'new'
         end
     end
-    
+
+    def edit
+    end
+
+    def update
+        byebug
+      @user.update(user_params)
+      if @user.save
+        flash[:notice] = "Profile has been updated!!"
+        redirect_to articles_path
+      else
+        render "edit"
+      end
+    end
+
     private
+    def set_user
+        @user = User.find(params[:id])
+    end
+
     def user_params
+        byebug
         params.require(:user).permit(:username, :password, :email)
     end
+
 end
