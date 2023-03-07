@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :destroy, :update]
+    before_action :set_user, only: [:edit, :destroy, :update]
+    before_action :set_user, :get_user_article , only: [:show]
+
+    def show
+        
+    end
 
     def new
         @user = User.new
@@ -20,7 +25,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        byebug
       @user.update(user_params)
       if @user.save
         flash[:notice] = "Profile has been updated!!"
@@ -36,8 +40,11 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        byebug
         params.require(:user).permit(:username, :password, :email)
+    end
+
+    def get_user_article
+        @articles = @user.articles
     end
 
 end
