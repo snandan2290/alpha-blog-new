@@ -12,7 +12,8 @@
         "plaintext",
         "html",
         "Log",
-        "ruby"
+        "ruby",
+        "erb"
     ],
     "spellright.parserByClass": {
         "Log": {
