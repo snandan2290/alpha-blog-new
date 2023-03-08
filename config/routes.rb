@@ -11,4 +11,9 @@ Rails.application.routes.draw do
 
   # post 'users' => 'users#create'
   resources :users, except: [:new]
+
+  #  Login and logout routes
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 end

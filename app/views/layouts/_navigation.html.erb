@@ -19,9 +19,23 @@
             <li><%= link_to "View article", articles_path, class: "dropdown-item" %></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
+
+        <% if logged_in? %>
+          <% puts ""%>  
+          <li class="nav-item">
+            <%= link_to 'Log out', logout_path, class: "nav-link", method: :delete %>
+          </li> 
+          <li class="nav-item">
+            <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+          </li>           
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Log in', login_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign up', signup_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:edit, :destroy, :update, :index]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :set_user, :get_user_article , only: [:show]
 
     def show
-        
+        get_user_article
     end
 
     def index
@@ -16,24 +14,21 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
         @user = User.new(user_params)
         if @user.save
+            session[:user_id] = @user.id
             flash[:notice] = "Welcome to the Alpha-blog #{@user.username}, you have successfully signup"
-            redirect_to  articles_path
+            redirect_to  user_path(@user)
         else
             render 'new'
         end
     end
 
     def edit
-        set_user
-        # @user = User.find(params[:id])
         puts "@users::#{@user}"
     end
 
     def update
-        set_user
       @user.update(user_params)
       if @user.save
         flash[:notice] = "Profile has been updated!!"
