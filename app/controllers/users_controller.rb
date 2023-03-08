@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:edit, :destroy, :update, :index]
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
     before_action :set_user, :get_user_article , only: [:show]
 
     def show
@@ -7,7 +8,7 @@ class UsersController < ApplicationController
     end
 
     def index
-        @users = User.all
+        @users = User.paginate(page: params[:page], per_page: 5)
     end
 
     def new
@@ -26,13 +27,17 @@ class UsersController < ApplicationController
     end
 
     def edit
+        set_user
+        # @user = User.find(params[:id])
+        puts "@users::#{@user}"
     end
 
     def update
+        set_user
       @user.update(user_params)
       if @user.save
         flash[:notice] = "Profile has been updated!!"
-        redirect_to articles_path
+        redirect_to user_path
       else
         render "edit"
       end
@@ -48,7 +53,7 @@ class UsersController < ApplicationController
     end
 
     def get_user_article
-        @articles = @user.articles
+        @articles = @user.articles.paginate(page: params[:page], per_page: 5)
     end
 
 end
