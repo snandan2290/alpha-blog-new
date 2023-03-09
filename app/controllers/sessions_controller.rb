@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
       flash[:notice] = "User logged in successfully!!"
-      redirect_to user_path(@user)
+      redirect_to articles_path
     else
       flash.now[:alert] = "Invalid Email address or Password!!"
       render 'new'

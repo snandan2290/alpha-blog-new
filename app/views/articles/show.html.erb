@@ -12,8 +12,10 @@
             </div>
             <div class="card-body">
                 <div class="card-text text-left"><%= simple_format(@article.description) %></div>
-                <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-success" %>
-                <%= link_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: "delete", data: {confirm: "Are you sure want to delete"} %>
+                <% if logged_in? && @article.user == current_user %>
+                    <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-success" %>
+                    <%= link_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: "delete", data: {confirm: "Are you sure want to delete"} %>
+                <% end %>
             </div>
             <div class="card-footer text-muted">
                 <small>Created <%= time_ago_in_words(@article.created_at)%> ago,
