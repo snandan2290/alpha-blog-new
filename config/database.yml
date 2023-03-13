@@ -19,7 +19,10 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
+  pool: 50
+  timeout: 1000
 
 production:
   <<: *default
   database: db/production.sqlite3
+  timeout: 5000  
