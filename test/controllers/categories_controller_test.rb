@@ -5,7 +5,8 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     puts "Testing setup"
     @category = Category.create(name: "sports")
-    puts "Testing setup::#{@category.id}"
+    @admin_user = User.create(username: "Vnandna", email: "Vnandan@gmail.com", password: "Vnandan", admin: true)
+    
   end
 
   test "should get index" do
@@ -22,6 +23,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
     # begin    
     #   category = Category.create(name: "Sports-1")
+      sign_in_as(@admin_user)
       puts "@category::should get new:::#{@category.id}"
       get new_category_url
       assert_response :success
@@ -31,11 +33,20 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create category" do
+    sign_in_as(@admin_user)    
     assert_difference('Category.count', 1) do
       post categories_url, params: { category: {name: 'Travel' } }
     end
 
     assert_redirected_to category_url(Category.last)
+  end
+
+  test "should not create category if not admin" do
+    assert_no_difference('Category.count') do
+      post categories_url, params: { category: {name: 'Travel' } }
+    end
+
+    assert_redirected_to categories_url
   end
 
   test "should show category" do
