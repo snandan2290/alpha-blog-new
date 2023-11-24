@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Pagnation gem
 gem 'will_paginate', '~> 3.0'
 
-# Use Active Storage variant
+# Use Active Storage variantcd 
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -53,4 +53,10 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+gem 'tzinfo-data'
+
+
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
